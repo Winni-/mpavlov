@@ -3,8 +3,8 @@
  * Copyright (C) 2014 Ivan Sorokin <sorokindev@gmail.com>
  */
 
+var mongoose = require('mongoose');
 var db = require('./mongoose');
-var mongoose = require('mongoose')
 
 module.exports = function (modelName) {
 
