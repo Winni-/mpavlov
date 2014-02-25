@@ -4,6 +4,7 @@
  */
 
 var db = require('./mongoose');
+var mongoose = require('mongoose')
 
 module.exports = function (modelName) {
 
@@ -17,7 +18,10 @@ module.exports = function (modelName) {
 
   // Один документ
   var get = function (req, res, next) {
-    db.model(modelName).find({_id: req.params.id}, function (err, data) {
+    try{var id = mongoose.Types.ObjectId(req.params.id)}
+    catch (e){res.send(400)}
+
+    db.model(modelName).find({_id: id}, function (err, data) {
       if (err) next(err);
       if (data) {
         res.send(data);
@@ -40,7 +44,10 @@ module.exports = function (modelName) {
 
   // Обновляем документ
   var update = function (req, res, next) {
-    db.model(modelName).update({_id: req.params.id}, {$set: req.body}, function (err, numberAffected, data) {
+    try{var id = mongoose.Types.ObjectId(req.params.id)}
+    catch (e){res.send(400)}
+
+    db.model(modelName).update({_id: id}, {$set: req.body}, function (err, numberAffected, data) {
       if (err) next(err);
 
       if (numberAffected) {
@@ -54,7 +61,10 @@ module.exports = function (modelName) {
 
   // Удаляем документ
   var remove = function (req, res, next) {
-    db.model(modelName).remove({_id: req.params.id}, function (err, data) {
+    try{var id = mongoose.Types.ObjectId(req.params.id)}
+    catch (e){res.send(400)}
+
+    db.model(modelName).remove({_id: id}, function (err, data) {
       if (err) next(err);
       res.send(data ? req.params.id : 404);
     });

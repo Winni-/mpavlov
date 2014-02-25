@@ -19,6 +19,7 @@ app.use(express.methodOverride()); // Переопределяем PUT и DELETE
 
 // Если произошла ошибка валидации то отдаем 400 Bad Request
 app.use(function (err, req, res, next) {
+  console.log(err.name);
   if (err.name == "ValidationError") {
     res.send(400, err);
   } else {
