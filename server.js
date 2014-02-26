@@ -40,13 +40,13 @@ var handlers = {
 // Метод запуска нашего сервера
 function run() {
   routes.setup(app, handlers); // Связуем Handlers с Routes
-  app.listen(config.get('port'), function () {
-    // Сервер запущен
-    winston.info("App running on port:" + config.get('port'));
-  });
   db.init(path.join(__dirname, "models"), function (err, data) {
     //Выводим сообщение об успешной инициализации базы данных
     winston.info("All the models are initialized");
+    app.listen(config.get('port'), function () {
+      // Сервер запущен
+      winston.info("App running on port:" + config.get('port'));
+    });
   });
 }
 
