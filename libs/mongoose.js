@@ -26,7 +26,7 @@ var init = function (modelsDirectory, callback) {
   //Считываем список файлов из modelsDirectory
   var schemaList = fs.readdirSync(modelsDirectory);
   //Создаем модели Mongoose и вызываем callback, когда все закончим
-  async.eachSeries(schemaList, function (item, cb) {
+  async.each(schemaList, function (item, cb) {
     var modelName = path.basename(item, '.js');
     models[modelName] = require(path.join(modelsDirectory, modelName))(mongoose);
     cb();
