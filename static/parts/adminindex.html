@@ -1,0 +1,123 @@
+<div class="row">
+	<div class="col-md-12">
+		<h2>Projects</h2>
+	</div>
+</div>
+<div class="well">
+	<div class="row">
+	
+		<div class="col-md-6">
+			<form name="addproject" novalidate ng-submit="addproject.$valid && ctrl.addProject(ctrl.project)">
+				<input type="text" class="form-control" ng-model="ctrl.project.name" placeholder="Name" required>
+				<input type="text" class="form-control" ng-model="ctrl.project.link" placeholder="Link" required>
+				<input type="file" class="form-control" id="img-input" onchange="angular.element(this).scope().fileNameChanged()" required>
+				<textarea class="form-control" cols="30" rows="10" ng-model="ctrl.project.description" placeholder="description" required></textarea>
+				<button class="btn" type="submit">Submit</button>
+			</form>
+			<div id="editor"></div>
+		</div>
+		<div class="col-md-6">
+			<div class="list-group">
+	            <div class="item" ng-repeat="(index, project) in projects">
+	            	<figure class="list-group-item">
+	            	    <div class="col-md-3 list-picture">
+	            	        <img class="img-thumbnail" ng-src="{{ project.image }}" alt="icon">
+	            	    </div>
+	            	    <figcaption class="col-md-9 row-content">
+	            	    	<div class="least-content">
+	            	    		<button class="btn update mdi-content-create btn-success btn-fab btn-raised" ng-click="update($event, project._id, index)"></button>
+	            	    		<button class="remove btn mdi-content-clear btn-danger btn-fab btn-raised" ng-click="removeP(project._id, index)"></button>
+	            	    	</div>
+	
+	            	        <h4 class="list-group-item-heading">{{ project.name }}</h4>
+	            	        <p class="list-group-item-text">{{ project.description }}</p>
+	            	        <a ng-href="{{ project.link }}" class="btn">{{ project.link }}</a>
+	            	    </figcaption>
+	            	</figure>
+	            	<div class="list-group-separator"></div>
+	            </div>
+	            
+	        </div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>History</h2>
+	</div>
+</div>
+<div class="well">
+	<div class="row">
+	
+		<div class="col-md-6">
+			<form name="addstory" novalidate ng-submit="addstory.$valid && ctrl.addStory(ctrl.story)">
+				<input type="text" class="form-control" ng-model="ctrl.story.name" placeholder="Name" required>			
+				<textarea class="form-control" cols="30" rows="10" ng-model="ctrl.story.description" placeholder="description" required></textarea>
+				<input class="form-control" type="text" placeholder="Dates From To" ng-model="ctrl.story.date">
+				<button class="btn" type="submit">Submit</button>
+			</form>
+			<div id="editor"></div>
+		</div>
+		<div class="col-md-6">
+			<div class="list-group">
+	            <div class="item" ng-repeat="(index, story) in history">
+	            	<figure class="list-group-item">  
+	            	    <figcaption class="">
+	            	    	<div class="least-content">
+	            	    		<button class="btn update mdi-content-create btn-success btn-fab btn-raised" ng-click="update($event, story._id, index)"></button>
+	            	    		<button class="remove btn mdi-content-clear btn-danger btn-fab btn-raised" ng-click="removeS(story._id, index)"></button>
+	            	    	</div>
+	
+	            	        <h4 class="list-group-item-heading">{{ story.name }}</h4>
+	            	        <p class="list-group-item-text">{{ story.description }}</p>
+	            	        <p class="list-group-item-text">{{ story.dates }}</p>
+	            	    </figcaption>
+	            	</figure>
+	            	<div class="list-group-separator"></div>
+	            </div>
+	            
+	        </div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>Contacts</h2>
+	</div>
+</div>
+<div class="well">
+	<div class="row">
+	
+		<div class="col-md-6">
+			<form name="addcontact" novalidate ng-submit="addcontact.$valid && ctrl.addContact(ctrl.contact)">
+				<input type="text" class="form-control" ng-model="ctrl.contact.name" placeholder="Name" required>
+				<input type="text" class="form-control" ng-model="ctrl.contact.link" placeholder="Link" required>
+				<input type="text" class="form-control" ng-model="ctrl.contact.icon" placeholder="Icon" required>			
+				<button class="btn" type="submit">Submit</button>
+			</form>
+			<div id="editor"></div>
+		</div>
+		<div class="col-md-6">
+			<div class="list-group">
+	            <div class="item" ng-repeat="(index, contact) in contacts">
+	            	<figure class="list-group-item">
+	            	    <div class="col-md-3 list-picture">
+	            	    	<i class="fa fa-{{ contact.icon }}"></i>
+	            	    </div>
+	            	    <figcaption class="col-md-9 row-content">
+	            	    	<div class="least-content">
+	            	    		<button class="btn update mdi-content-create btn-success btn-fab btn-raised" ng-click="update($event, contact._id, index)"></button>
+	            	    		<button class="remove btn mdi-content-clear btn-danger btn-fab btn-raised" ng-click="removeC(contact._id, index)"></button>
+	            	    	</div>
+	
+	            	        <h4 class="list-group-item-heading">{{ contact.name }}</h4>            	        
+	            	        <a ng-href="{{ contact.link }}" class="btn">{{ contact.link }}</a>
+	            	    </figcaption>
+	            	</figure>
+	            	<div class="list-group-separator"></div>
+	            </div>
+	            
+	        </div>
+		</div>
+	</div>
+</div>

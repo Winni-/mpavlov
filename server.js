@@ -6,6 +6,9 @@
 var express = require('express');
 var path = require('path');
 var winston = require('winston');
+var hash = require('pwd').hash;
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var routes = require('./routes'); // Файл с роутам
 var config = require('./libs/config'); // Используемая конфигурация
@@ -16,6 +19,13 @@ var app = express(); // Создаем обьект express
 app.use(express.json()); // "Обучаем" наше приложение понимать JSON и urlencoded запросы
 app.use(express.urlencoded());
 app.use(express.methodOverride()); // Переопределяем PUT и DELETE запросы для работы с WEB формами
+
+app.set('view engine', 'ejs');
+app.use(express.favicon());
+app.use(express.static("static"));
+
+
+
 
 // Если произошла ошибка валидации то отдаем 400 Bad Request
 app.use(function (err, req, res, next) {
@@ -32,14 +42,82 @@ app.use(function (err, req, res, next) {
   res.send(500, err);
 });
 
+//Аутентификация
+// middleware
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+  resave: false, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: 'shhhh, very secret'
+}));
+
+// Session-persisted message middleware
+
+app.use(function(req, res, next){
+  var err = req.session.error;
+  var msg = req.session.success;
+  delete req.session.error;
+  delete req.session.success;
+  res.locals.message = '';
+  if (err) res.locals.message = '<p class="msg error">' + err + '</p>';
+  if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
+  next();
+});
+
+
+
+
+
+
+// Authenticate using our plain-object database of doom!
+
+function authenticate(name, pass, fn) {
+  if (!module.parent) console.log('authenticating %s:%s', name, pass);
+  var User = {};
+  db.model("users").find({name: name}, function (err, data) {
+    if (err) console.log(err);
+    user = data[0];
+    // query the db for the given username
+    if (!user) return fn(new Error('cannot find user'));
+    // apply the same algorithm to the POSTed password, applying
+    // the hash against the pass / salt, if there is a match we
+    // found the user
+    
+    hash(pass, user.salt, function(err, hash){
+      console.log(user.salt);
+      if (err) return fn(err);
+      if (hash == user.hash) return fn(null, user);
+      fn(new Error('invalid password'));
+    });
+  });  
+
+}
+
+function restrict(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    req.session.error = 'Access denied!';
+    res.redirect('/login');
+  }
+}
+
+
+
+
+
 // Инициализируем Handlers
 var handlers = {
-  entities: require('./handlers/entities')
+  entities: require('./handlers/entities'),
+  project: require('./handlers/project'),
+  history: require('./handlers/history'),
+  contacts: require('./handlers/contacts')
 }
 
 // Метод запуска нашего сервера
 function run() {
-  routes.setup(app, handlers); // Связуем Handlers с Routes
+  routes.setup(app, handlers, express, restrict, authenticate); // Связуем Handlers с Routes
   db.init(path.join(__dirname, "models"), function (err, data) {
     //Выводим сообщение об успешной инициализации базы данных
     winston.info("All the models are initialized");
@@ -57,3 +135,6 @@ if (module.parent) {
   //Иначе стартуем сервер прямо сейчас
   run();
 }
+
+
+var users = require('./handlers/users');

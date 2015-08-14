@@ -36,6 +36,7 @@ module.exports = function (modelName) {
 
     db.model(modelName).create(req.body, function (err, data) {
       if (err) {
+        console.log(err);
         next(err);
       }
       res.send(data);

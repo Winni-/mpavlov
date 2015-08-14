@@ -1,0 +1,35 @@
+<div class="jumbotron">
+    <h1>About me</h1>
+    <h2 class="text-uppercase">My employement history</h2>
+    <p><a class="btn btn-primary btn-lg">Send me an email</a></p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="well">
+            <img src="" alt="" class="img-thumbnail">
+            <p>
+                This is my face, you can add this at your company page, if you employ me.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="list-group">
+            <div class="item" ng-repeat="story in history">
+                <div class="list-group-item">
+                    <div class="row-action-primary">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                    <div class="row-content">
+                        <div class="least-content">{{ story.date }}</div>
+                        <h4 class="list-group-item-heading">{{ story.name }}</h4>
+                        <p class="list-group-item-text">{{ story.description }}</p>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            </div>
+            
+        </div>
+       
+        
+    </div>
+</div>

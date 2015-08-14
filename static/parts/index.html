@@ -1,0 +1,46 @@
+<div class="jumbotron">
+    <h1>Hi I'm web programmer you need</h1>
+    <h2 class="text-uppercase">I'm front-end developer & javascript programmer <br>
+     with exelent skill in html and css</h2>
+    <p><a class="btn btn-primary btn-lg" href="mailto:winnipavlov+me@gmail.com">Send me an email</a></p>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        
+        <div class="list-group">            
+            <div class="item" ng-repeat="project in projects | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <figure class="list-group-item">
+                    <div class="col-md-3 list-picture" >
+                        <img class="img-thumbnail" src="img/placeholder.png" alt="icon"  style="background-image: url('{{ project.image }}')">
+                    </div>
+                    <figcaption class="col-md-9">
+                        <h4 class="list-group-item-heading">{{ project.name }}</h4>
+                        <p class="list-group-item-text">{{ project.description }}</p>
+                        <a ng-href="project.link">{{ project.link }}</a>
+                    </figcaption>
+                </figure>
+                <div class="list-group-separator"></div>
+            </div>
+            
+            
+        </div>
+        <ul class="pagination">
+            <li ng-class="{ disabled: prevPageDisabled()}"><a href="javascript:void(0)" ng-click="prevPage()">«</a></li>
+
+            <!-- <li class="active"><a href="javascript:void(0)">1</a></li> -->
+
+            <li ng-repeat="(index, page) in pages" ng-class="{ active: currentPage == index }"><a href="javascript:void(0)" ng-click="setPage(index)">{{ index+1 }}</a></li>
+            
+            <li ng-class="{ disabled: nextPageDisabled()}"><a href="" ng-click="nextPage()">»</a></li>
+        </ul>
+        
+    </div>
+    <div class="col-md-4">
+        
+        <div class="github-link">
+            <a href="" class="btn btn-flat btn-default btn-block"><i class="fa fa-github"></i> <img src="img/GitHub_Logo.png" alt=""></a>
+        </div>
+        <form action=""></form>
+        
+    </div>
+</div>

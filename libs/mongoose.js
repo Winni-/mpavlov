@@ -13,10 +13,10 @@ mongoose.connect(config.get('mongoose:uri'));
 var db = mongoose.connection;
 
 db.on('error', function (err) {
-  // Обрабатываем ошибку
+  console.log(err);
 });
 db.once('open', function callback() {
-  // Соеденение прошло успешно
+  console.log("Соеденились с базой");
 });
 
 var models = {};
@@ -32,6 +32,7 @@ var init = function (modelsDirectory, callback) {
     cb();
   }, callback);
 };
+
 
 //Возвращаем уже созданные модели из списка
 var model = function (modelName) {
