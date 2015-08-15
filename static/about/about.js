@@ -10,7 +10,7 @@ angular.module('myApp.about', ['ngRoute'])
 }])
 
 .controller('AboutCtrl', ["$http", "$scope", "$timeout", function($http, $scope, $timeout) {
-	$http.get('http://localhost:1337/v1/history')
+	$http.get('/v1/history')
 	.then(function(response) {
 		$timeout(function() {
 		    $scope.history = response.data;

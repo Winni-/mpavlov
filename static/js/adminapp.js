@@ -34,7 +34,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
 		$scope.projects.push(project);
 		$http({
 			method: "post",
-			url: "http://localhost:1337/v1/project",
+			url: "/v1/project",
 			data: project
 		}).then(function(response) {
           $scope.status = response.status;
@@ -45,7 +45,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
       	});      	
 	};
 
-	$http.get('http://localhost:1337/v1/project')
+	$http.get('/v1/project')
 	.then(function(response) {
 		$timeout(function() {
 		    $scope.projects = response.data;
@@ -58,7 +58,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
 	});
 
 	$scope.removeP = function(id, index) {		
-		$http.delete("http://localhost:1337/v1/project/"+id);
+		$http.delete("/v1/project/"+id);
 		$scope.projects.splice(index, 1);		
 	};
 	$scope.update = function($event, id, index) {
@@ -71,7 +71,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
 		$scope.history.push(story);
 		$http({
 			method: "post",
-			url: "http://localhost:1337/v1/history",
+			url: "/v1/history",
 			data: story
 		}).then(function(response) {
           //ok
@@ -79,7 +79,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
           //fail
       	});      	
 	};
-	$http.get('http://localhost:1337/v1/history')
+	$http.get('/v1/history')
 	.then(function(response) {
 		$timeout(function() {
 		    $scope.history = response.data;
@@ -91,7 +91,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
 	    $scope.getdata = response
 	});
 	$scope.removeS = function(id, index) {		
-		$http.delete("http://localhost:1337/v1/history/"+id);
+		$http.delete("/v1/history/"+id);
 		$scope.history.splice(index, 1);		
 	};
 	$scope.update = function($event, id, index) {
@@ -104,7 +104,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
 		$scope.contacts.push(contact);
 		$http({
 			method: "post",
-			url: "http://localhost:1337/v1/contacts",
+			url: "/v1/contacts",
 			data: contact
 		}).then(function(response) {
           //ok
@@ -113,7 +113,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
       	});      	
 	};
 
-	$http.get('http://localhost:1337/v1/contacts')
+	$http.get('/v1/contacts')
 	.then(function(response) {
 		$timeout(function() {
 		    $scope.contacts = response.data;
@@ -126,7 +126,7 @@ app.controller("mainCtrl",function($scope, $http, $timeout) {
 	});
 
 	$scope.removeC = function(id, index) {		
-		$http.delete("http://localhost:1337/v1/contacts/"+id);
+		$http.delete("/v1/contacts/"+id);
 		$scope.contacts.splice(index, 1);		
 	};
 	$scope.update = function($event, id, index) {

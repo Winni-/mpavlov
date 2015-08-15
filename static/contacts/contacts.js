@@ -10,7 +10,7 @@ angular.module('myApp.contacts', ['ngRoute'])
 }])
 
 .controller('ContactsCtrl', ["$http", "$scope", "$timeout", function($http, $scope, $timeout) {
-	$http.get('http://localhost:1337/v1/contacts')
+	$http.get('/v1/contacts')
 	.then(function(response) {
 		$timeout(function() {
 		    $scope.contacts = response.data;
