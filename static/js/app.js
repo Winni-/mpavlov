@@ -18,7 +18,7 @@ config(['$routeProvider', function($routeProvider) {
 	})
 }])
 .controller("IndexCtrl",["$scope", "$http", "$timeout",function($scope, $http, $timeout) {
-	$http.get('http://localhost:1337/v1/project')
+	$http.get('/v1/project')
 	.then(function(response) {
 		$timeout(function() {
 		    $scope.projects = response.data;
