@@ -40,11 +40,10 @@
             <div class="item" ng-repeat="contact in contacts">
                 <div class="list-group-item">
                     <div class="row-action-primary">
-                        <i class="fa fa-{{ contact.icon }}"></i>
+                        <a ng-href="{{ contact.link }}"><i class="fa fa-{{ contact.icon }}"></i></a>
                     </div>
                     <div class="row-content">                            
-                        <h4 class="list-group-item-heading">{{ contact.name }}</h4>
-                        <p class="list-group-item-text"><a class="btn" ng-href="{{ contact.link }}">{{ contact.link }}</a></p>
+                        <h4 class="list-group-item-heading"><a ng-href="{{ contact.link }}">{{ contact.name }}</a></h4>
                     </div>
                 </div>
                 <div class="list-group-separator"></div>

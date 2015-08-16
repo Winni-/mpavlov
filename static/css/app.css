@@ -106,6 +106,7 @@ textarea {
 .list-picture img{
   background-repeat: no-repeat;
   background-position: center center; 
+  background-size: 95% auto;
 }
 .github-link .btn{
   font-size: 4em;

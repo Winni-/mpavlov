@@ -17,6 +17,9 @@ config(['$routeProvider', function($routeProvider) {
 		template: "<h1>404</h1>"
 	})
 }])
+.config( ['$compileProvider',function( $compileProvider ){ 
+        $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
+}])
 .controller("IndexCtrl",["$scope", "$http", "$timeout",function($scope, $http, $timeout) {
 	$http.get('/v1/project')
 	.then(function(response) {
