@@ -150,15 +150,7 @@ var users = require('./handlers/users');
 // and hash the password ('foobar' is the pass here)
 var tj = {body:{}};
 tj.body.name = "Winni";
-hash('128635586', function(err, salt, hash){
-  if (err) console.log(err);
-  // store the salt & hash in the "db"
-  tj.body.salt = salt;
-  tj.body.hash = hash;
-  
-});
 var create = function (req, res, next) {
-
   db.model("users").create(req.body, function (err, data) {
     if (err) {
       console.log(err);
@@ -167,4 +159,12 @@ var create = function (req, res, next) {
     res.send(data);
   });
 };
-create(tj, fakeRes, fakenext);
+hash('128635586', function(err, salt, hash){
+  if (err) console.log(err);
+  // store the salt & hash in the "db"
+  tj.body.salt = salt;
+  tj.body.hash = hash;
+  create(tj, fakeRes, fakenext);
+  
+});
+
