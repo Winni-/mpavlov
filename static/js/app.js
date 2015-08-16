@@ -6,8 +6,8 @@ angular.module('myApp', [
   'myApp.about',
   'myApp.contacts',
   'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
+])
+.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 	.when("/", {
 		templateUrl: "parts/index.html",
@@ -17,8 +17,8 @@ config(['$routeProvider', function($routeProvider) {
 		template: "<h1>404</h1>"
 	})
 }])
-.config( ['$compileProvider',function( $compileProvider ){ 
-        $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
+.config(['$compileProvider',function( $compileProvider ){ 
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
 }])
 .controller("IndexCtrl",["$scope", "$http", "$timeout",function($scope, $http, $timeout) {
 	$http.get('/v1/project')
